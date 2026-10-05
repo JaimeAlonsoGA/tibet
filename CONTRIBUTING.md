@@ -1,6 +1,6 @@
 # Contributing to Tibet
 
-Contributions are welcome — new characters, bug fixes, translations, ideas. Issues and pull requests can be written in English or Spanish.
+Contributions are welcome — new characters, bug fixes, translations, ideas.
 
 ## Development
 

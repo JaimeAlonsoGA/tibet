@@ -17,7 +17,7 @@ export default class TibetPreferences extends ExtensionPreferences {
         const page = new Adw.PreferencesPage();
         window.add(page);
 
-        const characterGroup = new Adw.PreferencesGroup({title: 'Personaje'});
+        const characterGroup = new Adw.PreferencesGroup({title: 'Character'});
         page.add(characterGroup);
 
         const picker = new Gtk.Box({
@@ -49,7 +49,7 @@ export default class TibetPreferences extends ExtensionPreferences {
         page.add(timingGroup);
 
         const interval = Adw.SpinRow.new_with_range(1, 240, 5);
-        interval.title = 'Intervalo (min)';
+        interval.title = 'Interval (min)';
         settings.bind('interval-minutes', interval, 'value', Gio.SettingsBindFlags.DEFAULT);
         timingGroup.add(interval);
 
@@ -59,7 +59,7 @@ export default class TibetPreferences extends ExtensionPreferences {
             css_classes: ['flat'],
         });
         tryButton.connect('clicked', () => settings.set_boolean('show-now', true));
-        const tryRow = new Adw.ActionRow({title: 'Probar', activatable_widget: tryButton});
+        const tryRow = new Adw.ActionRow({title: 'Try now', activatable_widget: tryButton});
         tryRow.add_suffix(tryButton);
         timingGroup.add(tryRow);
     }
@@ -71,7 +71,7 @@ export default class TibetPreferences extends ExtensionPreferences {
                 pixel_size: PREVIEW_SIZE / 2,
                 width_request: PREVIEW_SIZE,
                 height_request: PREVIEW_SIZE,
-            }), 'Aleatorio');
+            }), 'Random');
 
         const character = CHARACTERS[id];
         const dir = this.dir.get_child('assets').get_child(id);

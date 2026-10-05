@@ -1,7 +1,7 @@
 {
   "uuid": "tibet@JaimeAlonsoGA.github.io",
-  "name": "Tibet",
-  "description": "Stretch breaks with a friendly animated buddy.",
+  "name": "Tibet – Stretch Break Reminder",
+  "description": "Gentle full-screen stretch breaks with cute animated buddies, so you actually get out of your chair.",
   "shell-version": ["48", "49"],
   "settings-schema": "org.gnome.shell.extensions.tibet",
   "url": "https://github.com/JaimeAlonsoGA/tibet"

@@ -169,6 +169,7 @@ class BreakOverlay extends St.Widget {
         }
 
         this._startLoops();
+        this._clearParticleTimeout();
         this._particleId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, PARTICLE_INTERVAL_MS, () => {
             this._spawnParticle();
             return GLib.SOURCE_CONTINUE;
@@ -198,12 +199,16 @@ class BreakOverlay extends St.Widget {
         }
     }
 
-    _onDestroy() {
-        this._releaseGrab();
+    _clearParticleTimeout() {
         if (this._particleId) {
             GLib.Source.remove(this._particleId);
             this._particleId = 0;
         }
+    }
+
+    _onDestroy() {
+        this._releaseGrab();
+        this._clearParticleTimeout();
     }
 });
 
