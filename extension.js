@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 import Clutter from 'gi://Clutter';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -9,7 +10,7 @@ import St from 'gi://St';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-import {CANVAS, CHARACTERS, ORDER} from './characters.js';
+import {CANVAS, CHARACTERS, ORDER, RANDOM} from './characters.js';
 
 const FADE_MS = 400;
 const STRETCH_MS = 1800;
@@ -257,8 +258,13 @@ export default class TibetExtension extends Extension {
         this._clearTimeout();
 
         let id = this._settings.get_string('character');
-        if (!ORDER.includes(id))
+        if (id === RANDOM) {
+            const others = ORDER.filter(c => c !== this._lastCharacter);
+            id = others[Math.floor(Math.random() * others.length)];
+        } else if (!ORDER.includes(id)) {
             id = ORDER[0];
+        }
+        this._lastCharacter = id;
 
         this._overlay = new BreakOverlay(this.dir.get_child('assets'), {id, ...CHARACTERS[id]});
         this._overlay.connect('destroy', () => {

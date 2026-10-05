@@ -10,6 +10,7 @@
         <choice value="llama"/>
         <choice value="gatito"/>
         <choice value="cozy"/>
+        <choice value="random"/>
       </choices>
       <default>'llama'</default>
     </key>

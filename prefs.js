@@ -1,10 +1,11 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
 import {ExtensionPreferences} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
-import {CHARACTERS, ORDER} from './characters.js';
+import {CHARACTERS, ORDER, RANDOM} from './characters.js';
 
 const PREVIEW_SIZE = 128;
 
@@ -27,7 +28,7 @@ export default class TibetPreferences extends ExtensionPreferences {
         characterGroup.add(picker);
 
         let first = null;
-        for (const id of ORDER) {
+        for (const id of [...ORDER, RANDOM]) {
             const button = new Gtk.ToggleButton({
                 child: this._buildPreview(id),
                 active: settings.get_string('character') === id,
@@ -64,6 +65,14 @@ export default class TibetPreferences extends ExtensionPreferences {
     }
 
     _buildPreview(id) {
+        if (id === RANDOM)
+            return this._buildTile(new Gtk.Image({
+                icon_name: 'media-playlist-shuffle-symbolic',
+                pixel_size: PREVIEW_SIZE / 2,
+                width_request: PREVIEW_SIZE,
+                height_request: PREVIEW_SIZE,
+            }), 'Aleatorio');
+
         const character = CHARACTERS[id];
         const dir = this.dir.get_child('assets').get_child(id);
 
@@ -81,14 +90,18 @@ export default class TibetPreferences extends ExtensionPreferences {
                 overlay.add_overlay(picture);
         });
 
+        return this._buildTile(overlay, character.name);
+    }
+
+    _buildTile(image, name) {
         const box = new Gtk.Box({
             orientation: Gtk.Orientation.VERTICAL,
             spacing: 6,
             margin_top: 6,
             margin_bottom: 6,
         });
-        box.append(overlay);
-        box.append(new Gtk.Label({label: character.name}));
+        box.append(image);
+        box.append(new Gtk.Label({label: name}));
         return box;
     }
 }

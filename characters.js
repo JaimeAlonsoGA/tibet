@@ -1,8 +1,11 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 // Shared between extension.js (GNOME Shell) and prefs.js (GTK).
 // Every layer is a 400x400 SVG; pivots are in canvas coordinates.
 export const CANVAS = 400;
 
 export const ORDER = ['llama', 'gatito', 'cozy'];
+
+export const RANDOM = 'random';
 
 export const CHARACTERS = {
     llama: {
