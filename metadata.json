@@ -1,0 +1,8 @@
+{
+  "uuid": "tibet@JaimeAlonsoGA.github.io",
+  "name": "Tibet",
+  "description": "Stretch breaks with a friendly animated buddy.",
+  "shell-version": ["48", "49"],
+  "settings-schema": "org.gnome.shell.extensions.tibet",
+  "url": "https://github.com/JaimeAlonsoGA/tibet"
+}

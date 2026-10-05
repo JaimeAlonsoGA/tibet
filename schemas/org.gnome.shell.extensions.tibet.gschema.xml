@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.tibet" path="/org/gnome/shell/extensions/tibet/">
+    <key name="interval-minutes" type="i">
+      <range min="1" max="240"/>
+      <default>45</default>
+    </key>
+    <key name="character" type="s">
+      <choices>
+        <choice value="llama"/>
+        <choice value="gatito"/>
+        <choice value="cozy"/>
+      </choices>
+      <default>'llama'</default>
+    </key>
+    <key name="show-now" type="b">
+      <default>false</default>
+    </key>
+  </schema>
+</schemalist>
