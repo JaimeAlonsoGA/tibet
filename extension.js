@@ -13,6 +13,7 @@ import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import {CANVAS, CHARACTERS, ORDER, RANDOM} from './characters.js';
 
 const FADE_MS = 400;
+const ENTER_KEYS = [Clutter.KEY_Return, Clutter.KEY_KP_Enter, Clutter.KEY_ISO_Enter];
 const STRETCH_MS = 1800;
 const PARTICLE_INTERVAL_MS = 450;
 
@@ -68,6 +69,11 @@ class BreakOverlay extends St.Widget {
             child: new St.Icon({icon_name: 'object-select-symbolic'}),
         });
         this._doneButton.connect('clicked', () => this.close());
+        // Only Enter (or the mouse) dismisses the break; St.Button also reacts to Space.
+        const onlyEnter = (_actor, event) => ENTER_KEYS.includes(event.get_key_symbol())
+            ? Clutter.EVENT_PROPAGATE : Clutter.EVENT_STOP;
+        this._doneButton.connect('key-press-event', onlyEnter);
+        this._doneButton.connect('key-release-event', onlyEnter);
         content.add_child(this._doneButton);
 
         this.connect('destroy', () => this._onDestroy());
